@@ -1,2 +1,2 @@
 run:
-	npx remix-serve build/server/index.js
+	node --inspect server.js
