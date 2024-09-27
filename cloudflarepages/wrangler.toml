@@ -1,0 +1,11 @@
+name = "gkuga-remix-examples-cloudflarepages"
+pages_build_output_dir = "build/client"
+compatibility_date = "2024-09-25"
+
+[env.production]
+compatibility_date = "2024-09-25"
+
+  [[env.production.d1_databases]]
+  database_id = "58f283e5-a829-47f1-95ce-bdc9dc13f2d3"
+  binding = "DB"
+  database_name = "DB"

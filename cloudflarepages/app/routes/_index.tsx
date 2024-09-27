@@ -1,4 +1,28 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
+import { json } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
+
+interface Env {
+  DB: D1Database;
+}
+
+type User = {
+  id: number;
+  username: string;
+};
+
+const users: User[] = [{ id: 1, username: "test" }]
+
+export async function loader({ context }: LoaderFunctionArgs) {
+  const env = context.cloudflare.env as Env;
+  console.log(env)
+
+  const { results } = await env.DB.prepare("SELECT * FROM users").all<User>();
+
+  return json({
+    users: results ?? [],
+  });
+}
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,6 +32,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const { users } = useLoaderData<typeof loader>();
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="flex flex-col items-center gap-16">
@@ -15,6 +40,11 @@ export default function Index() {
           <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
             Welcome to <span className="sr-only">Remix</span>
           </h1>
+          <ul>
+            {users.map((user) => (
+              <li key={user.id}>{user.username}</li>
+            ))}
+          </ul>
           <div className="h-[144px] w-[434px]">
             <img
               src="/logo-light.png"
