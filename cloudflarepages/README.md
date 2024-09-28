@@ -1,2 +1,3 @@
 - [Remix v2をCloudflare Pages + D1で動かすチュートリアル](https://zenn.dev/necocoa/articles/remix-v2-with-cloudflare-pages-d1)
-
+- [d1 + prisma + kysely-prisma の環境を作る](https://zenn.dev/mizchi/articles/d1-prisma-kysely)
+- [Cloudflare D1](https://www.prisma.io/docs/orm/overview/databases/cloudflare-d1)

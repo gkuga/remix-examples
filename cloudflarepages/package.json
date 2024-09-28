@@ -13,6 +13,7 @@
     "typegen": "wrangler types"
   },
   "dependencies": {
+    "@prisma/client": "^5.20.0",
     "@remix-run/cloudflare": "^2.12.1",
     "@remix-run/cloudflare-pages": "^2.12.1",
     "@remix-run/react": "^2.12.1",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240512.0",
+    "@iarna/toml": "^2.2.5",
     "@remix-run/dev": "^2.12.1",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
@@ -34,12 +36,17 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "kysely": "^0.27.4",
+    "kysely-d1": "^0.3.0",
     "postcss": "^8.4.38",
+    "prisma": "^5.20.0",
+    "prisma-kysely": "^1.8.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.1.6",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1",
-    "wrangler": "3.57.1"
+    "wrangler": "^3.57.1",
+    "zx": "^8.1.8"
   },
   "engines": {
     "node": ">=20.0.0"

@@ -1,4 +1,8 @@
+import type { D1Database } from "@cloudflare/workers-types";
+import type { DB } from "~/db/types";
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
+import { D1Dialect } from "kysely-d1";
+import { Kysely } from "kysely";
 import { json } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 
@@ -6,21 +10,15 @@ interface Env {
   DB: D1Database;
 }
 
-type User = {
-  id: number;
-  username: string;
-};
-
-const users: User[] = [{ id: 1, username: "test" }]
-
 export async function loader({ context }: LoaderFunctionArgs) {
   const env = context.cloudflare.env as Env;
-  console.log(env)
-
-  const { results } = await env.DB.prepare("SELECT * FROM users").all<User>();
+  const db = new Kysely<DB>({
+    dialect: new D1Dialect({ database: env.DB }),
+  });
+  const users = await db.selectFrom("User").selectAll().execute();
 
   return json({
-    users: results ?? [],
+    users: users ?? [],
   });
 }
 
@@ -42,7 +40,7 @@ export default function Index() {
           </h1>
           <ul>
             {users.map((user) => (
-              <li key={user.id}>{user.username}</li>
+              <li key={user.id}>{user.name}</li>
             ))}
           </ul>
           <div className="h-[144px] w-[434px]">

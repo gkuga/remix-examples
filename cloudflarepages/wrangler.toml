@@ -2,10 +2,7 @@ name = "gkuga-remix-examples-cloudflarepages"
 pages_build_output_dir = "build/client"
 compatibility_date = "2024-09-25"
 
-[env.production]
-compatibility_date = "2024-09-25"
-
-  [[env.production.d1_databases]]
-  database_id = "58f283e5-a829-47f1-95ce-bdc9dc13f2d3"
-  binding = "DB"
-  database_name = "DB"
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "cloudflarepages"
+database_id = "9f3a2ba8-21ef-4367-941e-a795af27f5bc"
